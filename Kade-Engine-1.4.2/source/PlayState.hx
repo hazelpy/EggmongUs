@@ -822,7 +822,7 @@ class PlayState extends MusicBeatState
 								add(waveSpriteFG);
 						*/
 			}
-			case 'crackus-moogus': {
+			case 'crackus-moogus', 'fracture', 'scramble': {
 				defaultCamZoom = 0.9;
 				curStage = 'lot';
 				var bg:FlxSprite = new FlxSprite(-550, -225).loadGraphic(Paths.image('eggmongus/bg'));

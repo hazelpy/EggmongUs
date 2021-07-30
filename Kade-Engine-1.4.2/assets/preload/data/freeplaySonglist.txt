@@ -18,3 +18,5 @@ Senpai:senpai:6
 Roses:senpai:6
 Thorns:spirit:6
 crackus-moogus:eggmong-us:7
+Fracture:eggmong-us:7
+Scramble:eggmong-us:7
