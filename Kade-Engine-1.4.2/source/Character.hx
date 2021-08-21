@@ -156,6 +156,23 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 41, -71);
 
 				playAnim('idle');
+			case 'mau':
+				// DAD ANIMATION LOADING CODE
+				tex = Paths.getSparrowAtlas('eggmongus/mau','shared');
+				frames = tex;
+				animation.addByPrefix('idle', 'IDLE', 24);
+				animation.addByPrefix('singUP', 'UP', 24);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24);
+				animation.addByPrefix('singDOWN', 'DOWN', 24);
+				animation.addByPrefix('singLEFT', 'LEFT', 24);
+
+				addOffset('idle', 0, -60);
+				addOffset("singUP", -110, 120);
+				addOffset("singRIGHT", -40, 80);
+				addOffset("singLEFT", 270, -80);
+				addOffset("singDOWN", -60, -50);
+
+				playAnim('idle');
 			case 'spooky':
 				tex = Paths.getSparrowAtlas('spooky_kids_assets');
 				frames = tex;

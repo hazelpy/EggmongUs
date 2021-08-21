@@ -56,7 +56,7 @@ class StoryMenuState extends MusicBeatState
 		"MOMMY MUST MURDER",
 		"RED SNOW",
 		"Hating Simulator ft. Moawling",
-		"eggmong us"
+		"eggmong us never sus"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -391,7 +391,7 @@ class StoryMenuState extends MusicBeatState
 				txtTracklist.text += "\n" + i;
 			}
 		} else {
-			txtTracklist.text += "\ncrackus moogus";
+			txtTracklist.text += "\ncrackus moogus\nFracture\nScramble";
 		}
 
 		txtTracklist.text += "\n";

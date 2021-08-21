@@ -21,8 +21,16 @@ class GameOverState extends FlxTransitionableState
 		bfY = y;
 	}
 
+	var deathAnim:FlxSprite;
+	public var animOffsets:Map<String, Array<Dynamic>>;
+	public function addOffset(name:String, x:Float = 0, y:Float = 0)
+	{
+		animOffsets[name] = [x, y];
+	}
+
 	override function create()
 	{
+		animOffsets = new Map<String, Array<Dynamic>>();
 		/* var loser:FlxSprite = new FlxSprite(100, 100);
 			var loseTex = FlxAtlasFrames.fromSparrow(AssetPaths.lose.png, AssetPaths.lose.xml);
 			loser.frames = loseTex;
@@ -30,12 +38,7 @@ class GameOverState extends FlxTransitionableState
 			loser.animation.play('lose');
 			// add(loser); */
 
-		var bf:Boyfriend = new Boyfriend(bfX, bfY);
-		// bf.scrollFactor.set();
-		add(bf);
-		bf.playAnim('firstDeath');
-
-		FlxG.camera.follow(bf, LOCKON, 0.001);
+		FlxG.camera.follow(deathAnim, LOCKON, 0.001);
 		/* 
 			var restart:FlxSprite = new FlxSprite(500, 50).loadGraphic(AssetPaths.restart.png);
 			restart.setGraphicSize(Std.int(restart.width * 0.6));
@@ -56,6 +59,15 @@ class GameOverState extends FlxTransitionableState
 
 	override function update(elapsed:Float)
 	{
+		switch(deathAnim.animation.curAnim.name) {
+			case 'firstDeath':
+				deathAnims.animation.offset.set(37, 11);
+			case 'deathLoop':
+				deathAnims.animation.offset.set(37, 5);
+			case 'deathConfirm':
+				deathAnims.animation.offset.set(37, 69);
+		}
+
 		var pressed:Bool = FlxG.keys.justPressed.ANY;
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
@@ -77,6 +89,12 @@ class GameOverState extends FlxTransitionableState
 				LoadingState.loadAndSwitchState(new PlayState());
 			});
 		}
+
+		if (deathAnim.animation.curAnim.name == 'firstDeath' && deathAnim.animation.curAnim.finished)
+			{
+				playAnim('deathLoop');
+			}
+
 		super.update(elapsed);
 	}
 }
