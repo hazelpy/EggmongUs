@@ -1,4 +1,7 @@
 Tutorial:gf:1
-crackus-moogus:eggmong-us:7
-Fracture:eggmong-us:7
-Scramble:eggmong-us:7
+crackus-moogus:eggmong-us:2
+Fracture:eggmong-us:2
+Scramble:eggmong-us:2
+Grit:eggmong-us:3
+Trance:eggmong-us:3
+Sunny-Side-Up:eggmong-us:3

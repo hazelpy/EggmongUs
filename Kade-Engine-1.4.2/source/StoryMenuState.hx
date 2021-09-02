@@ -25,7 +25,8 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
-		['Crackus-Moogus', 'Fracture', 'Scramble']
+		['Crackus-Moogus', 'Fracture', 'Scramble'],
+		['Grit', 'Trance', 'Sunny-Side-Up']
 	];
 	var curDifficulty:Int = 2;
 
@@ -33,12 +34,14 @@ class StoryMenuState extends MusicBeatState
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
+		['eggmongus', 'bf', 'gf'],
 		['eggmongus', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = [
 		"How to Funk",
-		"eggmong us never sus"
+		"eggmong us never sus",
+		"ok maybe just a lil sus"
 	];
 
 	var txtWeekTitle:FlxText;

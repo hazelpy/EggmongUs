@@ -132,6 +132,7 @@ class PlayState extends MusicBeatState
 	private var totalNotesHitDefault:Float = 0;
 	private var totalPlayed:Int = 0;
 	private var ss:Bool = false;
+	var lavaGlow:FlxSprite;
 
 
 	private var healthBarBG:FlxSprite;
@@ -823,7 +824,7 @@ class PlayState extends MusicBeatState
 						*/
 			}
 			case 'crackus-moogus', 'fracture', 'scramble': {
-				defaultCamZoom = 0.9;
+				defaultCamZoom = 0.9; // temporarily 0.8 reset to 0.9
 				curStage = 'lot';
 				var bg:FlxSprite = new FlxSprite(-550, -225).loadGraphic(Paths.image('eggmongus/bg'));
 					bg.setGraphicSize(Std.int(bg.width * 0.7875));
@@ -831,6 +832,69 @@ class PlayState extends MusicBeatState
 					bg.scrollFactor.set(1, 1);
 					bg.active = false;
 				add(bg);
+			}
+			case 'grit', 'trance', 'sunny-side-up'/**, 'crackus-moogus' /**temporary adding crackus here**/: {
+				defaultCamZoom = 0.8;
+				curStage = 'lava';
+				var bg:FlxSprite = new FlxSprite(-550, -225).loadGraphic(Paths.image('eggmongus/lavaStage/sky'));
+					bg.setGraphicSize(Std.int(bg.width * 0.7875));
+					bg.antialiasing = true;
+					bg.scrollFactor.set(1, 1);
+					bg.active = false;
+				add(bg);
+
+				var ground:FlxSprite = new FlxSprite(-550, -225).loadGraphic(Paths.image('eggmongus/lavaStage/ground'));
+					ground.setGraphicSize(Std.int(ground.width * 0.7875));
+					ground.antialiasing = true;
+					ground.scrollFactor.set(1, 1);
+					ground.active = false;
+				add(ground);
+
+				var lavaGroup:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
+				add(lavaGroup);
+
+				var lava:FlxSprite = new FlxSprite(-800, -200).loadGraphic(Paths.image('eggmongus/lavaStage/lava')); // tween to -600 x
+					lava.antialiasing = true;
+					lava.scrollFactor.set(1, 1);
+					lava.active = false;
+				lavaGroup.add(lava);
+
+				lavaGlow = new FlxSprite(-900, -330).loadGraphic(Paths.image('eggmongus/lavaStage/lavaGlow')); // tween to -600 x
+				lavaGlow.setGraphicSize(Std.int(lavaGlow.width * 1.25));
+				lavaGlow.antialiasing = true;
+				lavaGlow.scrollFactor.set(1, 1);
+				lavaGlow.alpha = 0;
+				lavaGlow.active = false;
+
+				FlxTween.tween(lava, {x: lava.x + 500}, 5, {type: PINGPONG, ease: FlxEase.quadInOut});
+				FlxTween.tween(lava, {y: lava.y - 60}, 7, {type: PINGPONG, ease: FlxEase.quadInOut});
+				
+				FlxTween.tween(lavaGlow, {x: lavaGlow.x + 500}, 5, {type: PINGPONG, ease: FlxEase.quadInOut});
+				FlxTween.tween(lavaGlow, {y: lavaGlow.y - 60}, 7, {type: PINGPONG, ease: FlxEase.quadInOut});
+				FlxTween.tween(lavaGlow, {alpha: 1}, 4, {type: PINGPONG, ease: FlxEase.quadInOut});
+
+				var platform:FlxSprite = new FlxSprite(-550, -185).loadGraphic(Paths.image('eggmongus/lavaStage/platform'));
+					platform.setGraphicSize(Std.int(platform.width * 0.7875));
+					platform.antialiasing = true;
+					platform.scrollFactor.set(1, 1);
+					platform.active = false;
+				add(platform);
+
+				var monitor:FlxSprite = new FlxSprite(-550, -225).loadGraphic(Paths.image('eggmongus/lavaStage/monitor'));
+					monitor.setGraphicSize(Std.int(monitor.width * 0.7875));
+					monitor.antialiasing = true;
+					monitor.scrollFactor.set(1, 1);
+					monitor.active = false;
+				add(monitor);
+
+				var vignette:FlxSprite = new FlxSprite(-550, -225).loadGraphic(Paths.image('eggmongus/lavaStage/vignette'));
+					vignette.antialiasing = true;
+					vignette.scrollFactor.set(1, 1);
+					vignette.active = false;
+					vignette.alpha = 0.6;
+					vignette.cameras = [camHUD];
+					vignette.screenCenter();
+				add(vignette);
 			}
 			default:
 			{
@@ -983,6 +1047,8 @@ class PlayState extends MusicBeatState
 				bg.active = false;
 				bg.color = 0xFF000000;
 				add(bg);
+			case 'lava':
+				add(lavaGlow);
 		}
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
